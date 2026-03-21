@@ -1,7 +1,9 @@
-import HomePage from "./Home";
+import Upload from "./Upload";
 
 function App() {
-  return <HomePage />;
+  return (
+    <Upload />
+  );
 }
 
 export default App;
