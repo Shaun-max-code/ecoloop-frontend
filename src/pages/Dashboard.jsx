@@ -31,7 +31,7 @@ export default function Dashboard() {
         {/* 🔥 BIG CARD */}
         <div style={bigCard}>
           <div>
-            <p style={{ opacity: 0.7 }}>Total Points</p>
+            <p style={{ opacity: 0.6 }}>Total Points</p>
             <h1 style={bigNumber}>{points}</h1>
           </div>
 
@@ -74,14 +74,14 @@ export default function Dashboard() {
   );
 }
 
-/* 🎨 STYLES */
+/* 🎨 STYLES (UPDATED COLORS ONLY) */
 
 /* MAIN CONTAINER */
 const container = {
   display: "flex",
   minHeight: "100vh",
-  background: "linear-gradient(135deg, #022c22, #001a14)",
-  color: "white",
+  background: "linear-gradient(135deg, #d9f99d, #6ee7b7, #34d399)",
+  color: "#1f2937",
   fontFamily: "sans-serif",
 };
 
@@ -89,8 +89,9 @@ const container = {
 const sidebar = {
   width: "260px",
   padding: "30px",
-  background: "rgba(0,255,150,0.05)",
-  borderRight: "1px solid #22c55e33",
+  background: "rgba(255,255,255,0.6)",
+  backdropFilter: "blur(10px)",
+  borderRight: "1px solid rgba(0,0,0,0.05)",
 };
 
 const menu = {
@@ -103,17 +104,18 @@ const menu = {
 const btn = {
   padding: "12px",
   background: "transparent",
-  border: "1px solid #22c55e33",
-  color: "white",
+  border: "1px solid rgba(0,0,0,0.1)",
+  color: "#1f2937",
   borderRadius: "10px",
   cursor: "pointer",
 };
 
 const activeBtn = {
   ...btn,
-  background: "#22c55e",
-  color: "#001a14",
+  background: "linear-gradient(135deg, #22c55e, #10b981)",
+  color: "white",
   fontWeight: "bold",
+  boxShadow: "0 4px 15px rgba(16,185,129,0.4)",
 };
 
 /* MAIN GRID */
@@ -130,12 +132,13 @@ const bigCard = {
   gridColumn: "span 3",
   padding: "30px",
   borderRadius: "20px",
-  background: "rgba(0,255,150,0.05)",
-  border: "1px solid #22c55e33",
+  background: "rgba(255,255,255,0.7)",
+  backdropFilter: "blur(10px)",
+  border: "1px solid rgba(0,0,0,0.05)",
   display: "flex",
   justifyContent: "space-between",
   alignItems: "center",
-  boxShadow: "0 0 30px #22c55e22",
+  boxShadow: "0 10px 30px rgba(0,0,0,0.1)",
 };
 
 const bigNumber = {
@@ -157,8 +160,10 @@ const circle = {
 const card = {
   padding: "20px",
   borderRadius: "16px",
-  background: "rgba(0,255,150,0.05)",
-  border: "1px solid #22c55e33",
+  background: "rgba(255,255,255,0.7)",
+  backdropFilter: "blur(10px)",
+  border: "1px solid rgba(0,0,0,0.05)",
+  boxShadow: "0 5px 15px rgba(0,0,0,0.05)",
 };
 
 /* WIDE CARD */
@@ -166,13 +171,14 @@ const wideCard = {
   gridColumn: "span 2",
   padding: "20px",
   borderRadius: "16px",
-  background: "rgba(0,255,150,0.05)",
-  border: "1px solid #22c55e33",
+  background: "rgba(255,255,255,0.7)",
+  backdropFilter: "blur(10px)",
+  border: "1px solid rgba(0,0,0,0.05)",
 };
 
 /* TEXT */
 const label = {
-  opacity: 0.7,
+  opacity: 0.6,
 };
 
 const value = {
@@ -183,16 +189,16 @@ const value = {
 /* PROGRESS BAR */
 const progressBg = {
   height: "8px",
-  background: "#064e3b",
+  background: "#d1fae5",
   borderRadius: "10px",
   marginTop: "10px",
 };
 
 const progressFill = {
   height: "100%",
-  background: "linear-gradient(90deg, #22c55e, #4ade80)",
+  background: "linear-gradient(90deg, #22c55e, #10b981)",
   borderRadius: "10px",
-  boxShadow: "0 0 10px #22c55e",
+  boxShadow: "0 0 10px #10b981",
 };
 
 /* 🔥 ANIMATION */

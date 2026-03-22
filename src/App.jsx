@@ -5,6 +5,7 @@ import Home from './pages/Home';           // Must have /pages/
 import Dashboard from './pages/Dashboard'; // Must have /pages/
 import Leaderboard from './pages/Leaderboard';
 import Profile from './pages/Profile';
+import Helpdesk from "./pages/Helpdesk";
 
 function App() {
   const [stats, setStats] = useState({
@@ -28,6 +29,7 @@ function App() {
           <Route path="/dashboard" element={<Dashboard stats={stats} />} />
           <Route path="/leaderboard" element={<Leaderboard userPoints={stats.points} />} />
           <Route path="/profile" element={<Profile stats={stats} />} />
+          <Route path="/helpdesk" element={<Helpdesk />} />
         </Routes>
       </div>
     </Router>

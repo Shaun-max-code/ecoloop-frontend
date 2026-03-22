@@ -19,40 +19,39 @@ export default function Leaderboard({ userPoints }) {
         Leader<span style={{ color: "#22c55e" }}>Board</span>
       </h1>
 
-     {/* 🏆 TOP 3 (CENTERED #1) */}
-<div style={top3Wrapper}>
-  
-  {/* 2nd */}
-  {top3[1] && (
-    <div style={cardStyle(1, top3[1].self)}>
-      <div style={rankBadgeStyle(2)}>2</div>
-      <div style={avatarStyle(top3[1].self)}>👤</div>
-      <h3>{top3[1].name}</h3>
-      <XPBar pts={top3[1].pts} max={maxPoints} />
-    </div>
-  )}
+      {/* 🏆 TOP 3 (CENTERED #1) */}
+      <div style={top3Wrapper}>
+        
+        {/* 2nd */}
+        {top3[1] && (
+          <div style={cardStyle(1, top3[1].self)}>
+            <div style={rankBadgeStyle(2)}>2</div>
+            <div style={avatarStyle(top3[1].self)}>👤</div>
+            <h3>{top3[1].name}</h3>
+            <XPBar pts={top3[1].pts} max={maxPoints} />
+          </div>
+        )}
 
-  {/* 1st (CENTER BIG) */}
-  {top3[0] && (
-    <div style={cardStyle(0, top3[0].self)}>
-      <div style={rankBadgeStyle(1)}>1</div>
-      <div style={{ ...avatarStyle(top3[0].self), fontSize: "50px" }}>👤</div>
-      <h2>{top3[0].name}</h2>
-      <XPBar pts={top3[0].pts} max={maxPoints} />
-    </div>
-  )}
+        {/* 1st */}
+        {top3[0] && (
+          <div style={cardStyle(0, top3[0].self)}>
+            <div style={rankBadgeStyle(1)}>1</div>
+            <div style={{ ...avatarStyle(top3[0].self), fontSize: "50px" }}>👤</div>
+            <h2>{top3[0].name}</h2>
+            <XPBar pts={top3[0].pts} max={maxPoints} />
+          </div>
+        )}
 
-  {/* 3rd */}
-  {top3[2] && (
-    <div style={cardStyle(2, top3[2].self)}>
-      <div style={rankBadgeStyle(3)}>3</div>
-      <div style={avatarStyle(top3[2].self)}>👤</div>
-      <h3>{top3[2].name}</h3>
-      <XPBar pts={top3[2].pts} max={maxPoints} />
-    </div>
-  )}
-
-</div>
+        {/* 3rd */}
+        {top3[2] && (
+          <div style={cardStyle(2, top3[2].self)}>
+            <div style={rankBadgeStyle(3)}>3</div>
+            <div style={avatarStyle(top3[2].self)}>👤</div>
+            <h3>{top3[2].name}</h3>
+            <XPBar pts={top3[2].pts} max={maxPoints} />
+          </div>
+        )}
+      </div>
 
       {/* 📊 OTHER PLAYERS */}
       <div style={{ maxWidth: "650px", margin: "auto" }}>
@@ -61,9 +60,7 @@ export default function Leaderboard({ userPoints }) {
             
             <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
               <span style={{ color: "#22c55e" }}>#{i + 4}</span>
-
               <div style={smallAvatar(p.self)}>👤</div>
-
               <span>{p.name}</span>
             </div>
 
@@ -86,15 +83,10 @@ function XPBar({ pts, max, small }) {
   return (
     <div style={{ width: "100%", marginTop: "8px" }}>
       <div style={xpBg}>
-        <div
-          style={{
-            ...xpFill,
-            width: `${width}%`,
-          }}
-        />
+        <div style={{ ...xpFill, width: `${width}%` }} />
       </div>
       {!small && (
-        <p style={{ fontSize: "12px", marginTop: "4px" }}>
+        <p style={{ fontSize: "12px", marginTop: "4px", color: "#1f2937" }}>
           {pts} pts
         </p>
       )}
@@ -102,13 +94,14 @@ function XPBar({ pts, max, small }) {
   );
 }
 
-/* 🎨 STYLES */
+/* 🎨 UPDATED COLORS */
 
+/* BACKGROUND */
 const containerStyle = {
   minHeight: "100vh",
   padding: "40px 20px",
-  background: "linear-gradient(135deg, #022c22, #001a14)",
-  color: "white",
+  background: "linear-gradient(135deg, #d9f99d, #6ee7b7, #34d399)",
+  color: "#1f2937",
   fontFamily: "sans-serif",
 };
 
@@ -116,6 +109,7 @@ const titleStyle = {
   textAlign: "center",
   fontSize: "2.6rem",
   marginBottom: "50px",
+  color: "#065f46",
 };
 
 const top3Wrapper = {
@@ -127,8 +121,11 @@ const top3Wrapper = {
 };
 
 /* 🏆 CARD */
-const cardStyle = (index, isSelf) => {
-  const scale = index === 0 ? 1.2 : index === 1 ? 1 : 0.9;
+const cardStyle = (position, isSelf) => {
+  const scale =
+    position === 0 ? 1.25 :
+    position === 1 ? 1 :
+    0.9;
 
   return {
     transform: `scale(${scale})`,
@@ -137,16 +134,16 @@ const cardStyle = (index, isSelf) => {
     borderRadius: "18px",
     width: "140px",
     position: "relative",
-    background: "rgba(0,255,150,0.05)",
-    border: "1px solid #22c55e33",
+    background: "rgba(255,255,255,0.7)",
+    backdropFilter: "blur(10px)",
+    border: isSelf ? "2px solid #22c55e" : "1px solid rgba(0,0,0,0.05)",
     boxShadow: isSelf
-      ? "0 0 30px #22c55e, 0 0 60px #22c55e33"
-      : "0 0 15px #000",
-    animation: isSelf ? "pulse 2s infinite" : "none",
+      ? "0 0 20px #10b98155"
+      : "0 5px 15px rgba(0,0,0,0.05)",
   };
 };
 
-/* 🔢 RANK BADGE */
+/* 🔢 BADGE */
 const rankBadgeStyle = (rank) => ({
   position: "absolute",
   top: "-12px",
@@ -156,9 +153,9 @@ const rankBadgeStyle = (rank) => ({
     rank === 1
       ? "#22c55e"
       : rank === 2
-      ? "#9ca3af"
-      : "#15803d",
-  color: "#000",
+      ? "#94a3b8"
+      : "#10b981",
+  color: "white",
   fontWeight: "bold",
   borderRadius: "50%",
   width: "32px",
@@ -166,20 +163,18 @@ const rankBadgeStyle = (rank) => ({
   display: "flex",
   alignItems: "center",
   justifyContent: "center",
-  boxShadow: "0 0 10px rgba(0,0,0,0.5)",
 });
 
 /* 👤 AVATAR */
 const avatarStyle = (isSelf) => ({
   fontSize: "45px",
   marginTop: "10px",
-  color: isSelf ? "#22c55e" : "#94a3b8",
-  textShadow: isSelf ? "0 0 20px #22c55e" : "none",
+  color: isSelf ? "#22c55e" : "#6b7280",
 });
 
 const smallAvatar = (isSelf) => ({
   fontSize: "20px",
-  color: isSelf ? "#22c55e" : "#94a3b8",
+  color: isSelf ? "#22c55e" : "#6b7280",
 });
 
 /* 📊 LIST */
@@ -190,23 +185,24 @@ const listItemStyle = (isSelf) => ({
   padding: "16px",
   marginBottom: "12px",
   borderRadius: "14px",
-  background: "rgba(0,255,150,0.05)",
-  border: isSelf ? "1px solid #22c55e" : "1px solid transparent",
-  boxShadow: isSelf ? "0 0 20px #22c55e55" : "none",
+  background: "rgba(255,255,255,0.7)",
+  backdropFilter: "blur(10px)",
+  border: isSelf ? "1px solid #22c55e" : "1px solid rgba(0,0,0,0.05)",
+  boxShadow: "0 5px 15px rgba(0,0,0,0.05)",
 });
 
 /* XP */
 const xpBg = {
   height: "6px",
-  background: "#064e3b",
+  background: "#d1fae5",
   borderRadius: "10px",
   overflow: "hidden",
 };
 
 const xpFill = {
   height: "100%",
-  background: "linear-gradient(90deg, #22c55e, #4ade80)",
-  boxShadow: "0 0 10px #22c55e",
+  background: "linear-gradient(90deg, #22c55e, #10b981)",
+  boxShadow: "0 0 8px #10b981",
   transition: "width 0.6s ease",
 };
 
@@ -214,13 +210,3 @@ const pointsText = {
   color: "#22c55e",
   fontWeight: "bold",
 };
-
-/* 🔥 ANIMATION */
-const styleSheet = document.styleSheets[0];
-styleSheet.insertRule(`
-@keyframes pulse {
-  0% { box-shadow: 0 0 10px #22c55e; }
-  50% { box-shadow: 0 0 40px #22c55e; }
-  100% { box-shadow: 0 0 10px #22c55e; }
-}
-`, styleSheet.cssRules.length);
