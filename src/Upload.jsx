@@ -1,41 +1,40 @@
 import { useState } from "react";
-import axios from "axios";
+import "./Upload.css";
 
 export default function Upload() {
-  const [file, setFile] = useState(null);
   const [weight, setWeight] = useState("");
-
-  const handleUpload = async () => {
-    if (!file || !weight) return alert("Fill all fields");
-
-    const formData = new FormData();
-    formData.append("image", file);
-    formData.append("weight", weight);
-
-    try {
-      await axios.post("http://127.0.0.1:8000/upload/", formData);
-      alert("Uploaded 🚀");
-      window.location.href = "/dashboard";
-    } catch {
-      alert("Upload failed ❌");
-    }
-  };
+  const [file, setFile] = useState(null);
 
   return (
-    <div className="container">
-      <div className="card">
-        <h2>Upload Waste</h2>
+    <div className="page">
 
-        <input
-          type="number"
-          placeholder="Weight (kg)"
-          onChange={(e) => setWeight(e.target.value)}
-        />
-
-        <input type="file" onChange={(e) => setFile(e.target.files[0])} />
-
-        <button onClick={handleUpload}>Upload</button>
+      <div className="upload-hero">
+        <h1>Upload Waste <span>♻️</span></h1>
+        <p>Turn your waste into impact</p>
       </div>
+
+      <div className="upload-container">
+        <div className="upload-box">
+
+          <input
+            type="number"
+            placeholder="Enter weight (kg)"
+            value={weight}
+            onChange={(e) => setWeight(e.target.value)}
+          />
+
+          <input
+            type="file"
+            onChange={(e) => setFile(e.target.files[0])}
+          />
+
+          <button className="upload-btn">
+            Upload
+          </button>
+
+        </div>
+      </div>
+
     </div>
   );
 }

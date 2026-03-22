@@ -1,23 +1,17 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Navbar from "./Navbar";
-import Home from "./Home";
-import Upload from "./Upload";
-import Dashboard from "./Dashboard";
-import Leaderboard from "./Leaderboard";
-import "./styles.css";
+import Navbar from './Navbar';
+import Dashboard from './Dashboard';
+import Leaderboard from './Leaderboard';
+import Profile from './Profile'; // Note: check your casing (profile vs Profile)
 
 function App() {
   return (
-    <BrowserRouter>
+    <div className="flex bg-gray-50 min-h-screen">
       <Navbar />
-
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/upload" element={<Upload />} />
-        <Route path="/dashboard" element={<Dashboard />} />
-        <Route path="/leaderboard" element={<Leaderboard />} />
-      </Routes>
-    </BrowserRouter>
+      <main className="flex-1">
+        <Dashboard /> 
+        {/* Later, you will wrap these in <Routes> from react-router-dom */}
+      </main>
+    </div>
   );
 }
 

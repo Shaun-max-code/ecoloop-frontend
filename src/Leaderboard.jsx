@@ -1,24 +1,12 @@
-import { useEffect, useState } from "react";
-import axios from "axios";
-
 export default function Leaderboard() {
-  const [users, setUsers] = useState([]);
-
-  useEffect(() => {
-    axios.get("http://127.0.0.1:8000/leaderboard/")
-      .then(res => setUsers(res.data.users));
-  }, []);
-
   return (
-    <div className="container">
-      <div className="card">
-        <h2>Leaderboard</h2>
+    <div className="page">
+      <h1 className="page-title">Leaderboard 🏆</h1>
 
-        {users.map((u, i) => (
-          <div key={i}>
-            {i + 1}. {u.user__username} — {u.total_points}
-          </div>
-        ))}
+      <div className="leaderboard">
+        <div className="leader-card">🥇 Shaun - 120 pts</div>
+        <div className="leader-card">🥈 Alex - 100 pts</div>
+        <div className="leader-card">🥉 John - 80 pts</div>
       </div>
     </div>
   );
