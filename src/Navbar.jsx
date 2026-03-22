@@ -1,61 +1,14 @@
-import { NavLink, useLocation } from 'react-router-dom';
-import { useState, useEffect } from 'react';
-import './Navbar.css';
-
-const navItems = [
-  { path: '/', label: 'Upload', icon: '📷' },
-  { path: '/dashboard', label: 'Dashboard', icon: '📊' },
-  { path: '/leaderboard', label: 'Leaderboard', icon: '🏆' },
-  { path: '/profile', label: 'Profile', icon: '👤' },
-];
+import React from 'react';
+import { Link } from 'react-router-dom';
 
 export default function Navbar() {
-  const [scrolled, setScrolled] = useState(false);
-  const [menuOpen, setMenuOpen] = useState(false);
-  const location = useLocation();
-
-  useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 20);
-    window.addEventListener('scroll', onScroll);
-    return () => window.removeEventListener('scroll', onScroll);
-  }, []);
-
-  useEffect(() => setMenuOpen(false), [location]);
-
   return (
-    <nav className={`navbar ${scrolled ? 'navbar--scrolled' : ''}`}>
-      <div className="navbar__inner">
-        <NavLink to="/" className="navbar__logo">
-          <span className="navbar__logo-icon">♻️</span>
-          <span className="navbar__logo-text">Eco<span>Loop</span></span>
-        </NavLink>
-
-        <ul className={`navbar__links ${menuOpen ? 'navbar__links--open' : ''}`}>
-          {navItems.map(({ path, label, icon }) => (
-            <li key={path}>
-              <NavLink
-                to={path}
-                end={path === '/'}
-                className={({ isActive }) => `navbar__link ${isActive ? 'navbar__link--active' : ''}`}
-              >
-                <span className="navbar__link-icon">{icon}</span>
-                <span className="navbar__link-label">{label}</span>
-              </NavLink>
-            </li>
-          ))}
-        </ul>
-
-        <div className="navbar__right">
-          <div className="navbar__status">
-            <span className="navbar__status-dot" />
-            <span>Live</span>
-          </div>
-          <button className="navbar__burger" onClick={() => setMenuOpen(!menuOpen)} aria-label="Toggle menu">
-            <span className={menuOpen ? 'open' : ''} />
-            <span className={menuOpen ? 'open' : ''} />
-            <span className={menuOpen ? 'open' : ''} />
-          </button>
-        </div>
+    <nav className="flex justify-between p-6 border-b border-white/10">
+      <Link to="/" className="font-bold text-green-400">EcoLoop 🌱</Link>
+      <div className="flex gap-6">
+        <Link to="/dashboard" className="text-white hover:text-green-400">Dashboard</Link>
+        <Link to="/leaderboard" className="text-white hover:text-green-400">Leaderboard</Link>
+        <Link to="/profile" className="text-white hover:text-green-400">Profile</Link>
       </div>
     </nav>
   );
