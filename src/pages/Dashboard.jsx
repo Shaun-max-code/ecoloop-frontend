@@ -1,35 +1,205 @@
-import React from 'react';
+import React from "react";
 
-export default function Dashboard({ stats }) { // <--- MUST have { stats } here
+export default function Dashboard() {
+  const points = 1240;
+  const waste = 15;
+  const co2 = 32.5;
+
   return (
-    <div className="home__container animate-fade-up">
-      <div className="home__header text-left">
-        <span className="tag">Live System Data</span>
-        <h1 className="home__title mt-4 italic">Impact <span className="neon-text">Nexus</span></h1>
+    <div style={container}>
+      
+      {/* 🔹 SIDEBAR */}
+      <div style={sidebar}>
+        <h1 style={{ fontSize: "26px" }}>
+          EcoLoop <span style={{ color: "#22c55e" }}>🌱</span>
+        </h1>
+
+        <p style={{ marginTop: "10px", opacity: 0.7 }}>
+          Smart Waste System
+        </p>
+
+        <div style={menu}>
+          <button style={activeBtn}>Dashboard</button>
+          <button style={btn}>Leaderboard</button>
+          <button style={btn}>Profile</button>
+        </div>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        {/* Main Stats Card */}
-        <div className="glass-card p-8 col-span-1 md:col-span-2 flex justify-between items-center relative overflow-hidden">
-           <div className="absolute top-0 right-0 w-32 h-32 bg-[var(--green-muted)] blur-[60px] opacity-20" />
-           <div>
-             <p className="form-label">Total Points Earned</p>
-             <h2 className="text-6xl font-black neon-text mt-2">{stats.points}</h2>
-           </div>
-           <div className="hidden md:block w-20 h-20 rounded-full border-b-2 border-r-2 border-[var(--green-neon)] animate-spin-slow" />
+      {/* 🔹 MAIN GRID */}
+      <div style={main}>
+
+        {/* 🔥 BIG CARD */}
+        <div style={bigCard}>
+          <div>
+            <p style={{ opacity: 0.7 }}>Total Points</p>
+            <h1 style={bigNumber}>{points}</h1>
+          </div>
+
+          {/* Animated circle */}
+          <div style={circle}></div>
         </div>
 
-        {/* Secondary Stats */}
-        <div className="glass-card p-8 hover:border-[var(--green-neon)] transition-colors">
-          <p className="form-label">CO₂ Diversion</p>
-          <h3 className="text-3xl font-bold mt-2 italic">{stats.co2.toFixed(1)} KG</h3>
+        {/* 📊 CO2 CARD */}
+        <div style={card}>
+          <p style={label}>CO₂ Saved</p>
+          <h2 style={value}>{co2} KG</h2>
         </div>
 
-        <div className="glass-card p-8 hover:border-[var(--green-neon)] transition-colors">
-          <p className="form-label">Waste Entries</p>
-          <h3 className="text-3xl font-bold mt-2 italic">{stats.waste} LOGS</h3>
+        {/* 🗑️ WASTE CARD */}
+        <div style={card}>
+          <p style={label}>Waste Entries</p>
+          <h2 style={value}>{waste} Logs</h2>
         </div>
+
+        {/* 📈 PROGRESS CARD */}
+        <div style={wideCard}>
+          <p style={label}>Impact Level</p>
+
+          <div style={progressBg}>
+            <div
+              style={{
+                ...progressFill,
+                width: `${Math.min(points / 20, 100)}%`,
+              }}
+            />
+          </div>
+
+          <p style={{ marginTop: "10px", opacity: 0.6 }}>
+            Keep contributing to increase impact 🚀
+          </p>
+        </div>
+
       </div>
     </div>
   );
 }
+
+/* 🎨 STYLES */
+
+/* MAIN CONTAINER */
+const container = {
+  display: "flex",
+  minHeight: "100vh",
+  background: "linear-gradient(135deg, #022c22, #001a14)",
+  color: "white",
+  fontFamily: "sans-serif",
+};
+
+/* SIDEBAR */
+const sidebar = {
+  width: "260px",
+  padding: "30px",
+  background: "rgba(0,255,150,0.05)",
+  borderRight: "1px solid #22c55e33",
+};
+
+const menu = {
+  marginTop: "30px",
+  display: "flex",
+  flexDirection: "column",
+  gap: "12px",
+};
+
+const btn = {
+  padding: "12px",
+  background: "transparent",
+  border: "1px solid #22c55e33",
+  color: "white",
+  borderRadius: "10px",
+  cursor: "pointer",
+};
+
+const activeBtn = {
+  ...btn,
+  background: "#22c55e",
+  color: "#001a14",
+  fontWeight: "bold",
+};
+
+/* MAIN GRID */
+const main = {
+  flex: 1,
+  display: "grid",
+  gridTemplateColumns: "2fr 1fr 1fr",
+  gap: "20px",
+  padding: "30px",
+};
+
+/* BIG CARD */
+const bigCard = {
+  gridColumn: "span 3",
+  padding: "30px",
+  borderRadius: "20px",
+  background: "rgba(0,255,150,0.05)",
+  border: "1px solid #22c55e33",
+  display: "flex",
+  justifyContent: "space-between",
+  alignItems: "center",
+  boxShadow: "0 0 30px #22c55e22",
+};
+
+const bigNumber = {
+  fontSize: "70px",
+  fontWeight: "bold",
+};
+
+/* ANIMATED CIRCLE */
+const circle = {
+  width: "80px",
+  height: "80px",
+  borderRadius: "50%",
+  border: "4px solid #22c55e",
+  borderTop: "4px solid transparent",
+  animation: "spin 2s linear infinite",
+};
+
+/* SMALL CARD */
+const card = {
+  padding: "20px",
+  borderRadius: "16px",
+  background: "rgba(0,255,150,0.05)",
+  border: "1px solid #22c55e33",
+};
+
+/* WIDE CARD */
+const wideCard = {
+  gridColumn: "span 2",
+  padding: "20px",
+  borderRadius: "16px",
+  background: "rgba(0,255,150,0.05)",
+  border: "1px solid #22c55e33",
+};
+
+/* TEXT */
+const label = {
+  opacity: 0.7,
+};
+
+const value = {
+  fontSize: "28px",
+  marginTop: "5px",
+};
+
+/* PROGRESS BAR */
+const progressBg = {
+  height: "8px",
+  background: "#064e3b",
+  borderRadius: "10px",
+  marginTop: "10px",
+};
+
+const progressFill = {
+  height: "100%",
+  background: "linear-gradient(90deg, #22c55e, #4ade80)",
+  borderRadius: "10px",
+  boxShadow: "0 0 10px #22c55e",
+};
+
+/* 🔥 ANIMATION */
+const styleSheet = document.styleSheets[0];
+styleSheet.insertRule(`
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+`, styleSheet.cssRules.length);
