@@ -1,68 +1,41 @@
 import { useState } from "react";
+import axios from "axios";
 
-function Upload() {
-  const [weight, setWeight] = useState("");
+export default function Upload() {
   const [file, setFile] = useState(null);
+  const [weight, setWeight] = useState("");
 
-  const uploadWaste = async () => {
-    if (!weight || !file) {
-      alert("Enter weight and select file");
-      return;
-    }
+  const handleUpload = async () => {
+    if (!file || !weight) return alert("Fill all fields");
 
-    let formData = new FormData();
-    formData.append("weight", weight);
+    const formData = new FormData();
     formData.append("image", file);
+    formData.append("weight", weight);
 
     try {
-      let res = await fetch("http://127.0.0.1:8000/upload/", {
-        method: "POST",
-        body: formData,
-      });
-
-      let data = await res.json();
-      console.log(data);
-
-      alert("Uploaded successfully ✅");
-    } catch (err) {
-      console.error(err);
+      await axios.post("http://127.0.0.1:8000/upload/", formData);
+      alert("Uploaded 🚀");
+      window.location.href = "/dashboard";
+    } catch {
       alert("Upload failed ❌");
     }
   };
 
   return (
     <div className="container">
-      
-      {/* Upload Box */}
-      <div className="upload-box">
-        <h3>Upload Waste</h3>
+      <div className="card">
+        <h2>Upload Waste</h2>
 
-        {/* 🔥 Weight Input */}
         <input
           type="number"
-          placeholder="Enter weight (kg)"
-          value={weight}
+          placeholder="Weight (kg)"
           onChange={(e) => setWeight(e.target.value)}
         />
 
-        <br /><br />
+        <input type="file" onChange={(e) => setFile(e.target.files[0])} />
 
-        {/* 🔥 File Input */}
-        <input
-          type="file"
-          onChange={(e) => setFile(e.target.files[0])}
-        />
-
-        <br /><br />
-
-        {/* 🔥 Submit Button */}
-        <button className="btn" onClick={uploadWaste}>
-          Submit
-        </button>
+        <button onClick={handleUpload}>Upload</button>
       </div>
-
     </div>
   );
 }
-
-export default Upload;
