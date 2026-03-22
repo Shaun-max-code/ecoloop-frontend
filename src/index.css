@@ -1,3 +1,150 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Mono:wght@300;400;500&family=Cabinet+Grotesk:wght@400;500;700;800;900&display=swap');
+
+:root {
+  --bg-void: #030a06;
+  --bg-deep: #070f09;
+  --bg-card: rgba(10, 20, 12, 0.85);
+  --bg-glass: rgba(255, 255, 255, 0.03);
+
+  --green-neon: #39ff88;
+  --green-mid: #1aff6e;
+  --green-soft: #2dd468;
+  --green-dim: #0d7a3a;
+  --green-muted: rgba(57, 255, 136, 0.12);
+
+  --teal-glow: #00ffd5;
+  --amber-warm: #ffb830;
+  --coral-accent: #ff6b6b;
+  --purple-trace: #a855f7;
+
+  --text-primary: #e8f5ec;
+  --text-secondary: #7aad8a;
+  --text-muted: #3d6b4a;
+  --text-dim: #1f3d29;
+
+  --border-subtle: rgba(57, 255, 136, 0.08);
+  --border-glow: rgba(57, 255, 136, 0.35);
+
+  --font-display: 'Syne', sans-serif;
+  --font-body: 'Cabinet Grotesk', sans-serif;
+  --font-mono: 'DM Mono', monospace;
+
+  --radius-sm: 8px;
+  --radius-md: 16px;
+  --radius-lg: 24px;
+  --radius-xl: 32px;
+
+  --shadow-card: 0 8px 32px rgba(0,0,0,0.6), 0 0 0 1px rgba(57,255,136,0.06);
+  --shadow-glow: 0 0 40px rgba(57, 255, 136, 0.15);
+  --shadow-glow-strong: 0 0 80px rgba(57, 255, 136, 0.3);
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg-void);
+  color: var(--text-primary);
+  font-family: var(--font-body);
+  line-height: 1.6;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--bg-void); }
+::-webkit-scrollbar-thumb { background: var(--green-dim); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: var(--green-neon); }
+
+/* Selection */
+::selection { background: rgba(57,255,136,0.2); color: var(--green-neon); }
+
+/* Utility classes */
+.page-wrapper {
+  min-height: 100vh;
+  padding-top: 72px;
+  position: relative;
+}
+
+.glass-card {
+  background: var(--bg-card);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  transition: border-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.glass-card:hover {
+  border-color: var(--border-glow);
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-glow);
+}
+
+.neon-text {
+  color: var(--green-neon);
+  text-shadow: 0 0 20px rgba(57,255,136,0.5);
+}
+
+.tag {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--green-neon);
+  background: var(--green-muted);
+  border: 1px solid rgba(57,255,136,0.2);
+  padding: 4px 10px;
+  border-radius: 100px;
+}
+
+/* Page fade-in animation */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(28px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes pulse-glow {
+  0%, 100% { box-shadow: 0 0 20px rgba(57,255,136,0.2); }
+  50% { box-shadow: 0 0 40px rgba(57,255,136,0.5); }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-8px); }
+}
+
+@keyframes spin-slow {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+.animate-fade-up {
+  animation: fadeUp 0.6s ease both;
+}
+
+.animate-float {
+  animation: float 4s ease-in-out infinite;
+}
+
+/* Noise overlay texture */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0.35;
+}

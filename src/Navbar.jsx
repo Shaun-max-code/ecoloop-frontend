@@ -1,25 +1,62 @@
-// Navbar.jsx
-import React from 'react';
+import { NavLink, useLocation } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import './Navbar.css';
 
-const Navbar = () => {
+const navItems = [
+  { path: '/', label: 'Upload', icon: '📷' },
+  { path: '/dashboard', label: 'Dashboard', icon: '📊' },
+  { path: '/leaderboard', label: 'Leaderboard', icon: '🏆' },
+  { path: '/profile', label: 'Profile', icon: '👤' },
+];
+
+export default function Navbar() {
+  const [scrolled, setScrolled] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
+  const location = useLocation();
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 20);
+    window.addEventListener('scroll', onScroll);
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
+
+  useEffect(() => setMenuOpen(false), [location]);
+
   return (
-    <nav className="fixed left-0 top-0 h-screen w-64 bg-white/10 backdrop-blur-lg border-r border-white/20 p-6 flex flex-col justify-between">
-      <div>
-        <h1 className="text-2xl font-bold bg-gradient-to-r from-green-400 to-blue-500 bg-clip-text text-transparent mb-10">
-          EcoLoop
-        </h1>
-        <ul className="space-y-4">
-          <li className="hover:translate-x-2 transition-transform cursor-pointer font-medium text-gray-700">Dashboard</li>
-          <li className="hover:translate-x-2 transition-transform cursor-pointer font-medium text-gray-700">Leaderboard</li>
-          <li className="hover:translate-x-2 transition-transform cursor-pointer font-medium text-gray-700">Profile</li>
+    <nav className={`navbar ${scrolled ? 'navbar--scrolled' : ''}`}>
+      <div className="navbar__inner">
+        <NavLink to="/" className="navbar__logo">
+          <span className="navbar__logo-icon">♻️</span>
+          <span className="navbar__logo-text">Eco<span>Loop</span></span>
+        </NavLink>
+
+        <ul className={`navbar__links ${menuOpen ? 'navbar__links--open' : ''}`}>
+          {navItems.map(({ path, label, icon }) => (
+            <li key={path}>
+              <NavLink
+                to={path}
+                end={path === '/'}
+                className={({ isActive }) => `navbar__link ${isActive ? 'navbar__link--active' : ''}`}
+              >
+                <span className="navbar__link-icon">{icon}</span>
+                <span className="navbar__link-label">{label}</span>
+              </NavLink>
+            </li>
+          ))}
         </ul>
-      </div>
-      <div className="p-4 bg-green-50 rounded-xl">
-        <p className="text-xs text-green-800 font-bold">Your Impact</p>
-        <p className="text-xl">🌿 1,240kg</p>
+
+        <div className="navbar__right">
+          <div className="navbar__status">
+            <span className="navbar__status-dot" />
+            <span>Live</span>
+          </div>
+          <button className="navbar__burger" onClick={() => setMenuOpen(!menuOpen)} aria-label="Toggle menu">
+            <span className={menuOpen ? 'open' : ''} />
+            <span className={menuOpen ? 'open' : ''} />
+            <span className={menuOpen ? 'open' : ''} />
+          </button>
+        </div>
       </div>
     </nav>
   );
-};
-
-export default Navbar;
+}

@@ -1,18 +1,29 @@
+import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
+import { useEffect } from 'react';
 import Navbar from './Navbar';
+import Home from './Home';
 import Dashboard from './Dashboard';
 import Leaderboard from './Leaderboard';
-import Profile from './Profile'; // Note: check your casing (profile vs Profile)
+import Profile from './Profile';
+import './index.css';
 
-function App() {
-  return (
-    <div className="flex bg-gray-50 min-h-screen">
-      <Navbar />
-      <main className="flex-1">
-        <Dashboard /> 
-        {/* Later, you will wrap these in <Routes> from react-router-dom */}
-      </main>
-    </div>
-  );
+function ScrollToTop() {
+  const { pathname } = useLocation();
+  useEffect(() => { window.scrollTo(0, 0); }, [pathname]);
+  return null;
 }
 
-export default App;
+export default function App() {
+  return (
+    <Router>
+      <ScrollToTop />
+      <Navbar />
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/leaderboard" element={<Leaderboard />} />
+        <Route path="/profile" element={<Profile />} />
+      </Routes>
+    </Router>
+  );
+}
