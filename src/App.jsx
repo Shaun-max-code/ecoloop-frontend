@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Navbar from './Navbar';
-import Home from './pages/Home';           // Must have /pages/
+import Upload from './pages/Upload';           // Must have /pages/
 import Dashboard from './pages/Dashboard'; // Must have /pages/
 import Leaderboard from './pages/Leaderboard';
 import Profile from './pages/Profile';
@@ -26,12 +26,13 @@ function App() {
       <div className="page-wrapper min-h-screen bg-[#030a06]">
         <Navbar />
         <Routes>
-          <Route path="/" element={<Home onUpload={handleUpload} />} />
+           <Route path="/" element={<Landing />} />
+          <Route path="/upload" element={<Upload />} />
           <Route path="/dashboard" element={<Dashboard stats={stats} />} />
           <Route path="/leaderboard" element={<Leaderboard userPoints={stats.points} />} />
           <Route path="/profile" element={<Profile stats={stats} />} />
           <Route path="/helpdesk" element={<Helpdesk />} />
-          <Route path="/" element={<Landing />} />
+         
         </Routes>
       </div>
     </Router>

@@ -1,26 +1,18 @@
 import React from "react";
+import { Link, useNavigate } from "react-router-dom";
 
 export default function Landing() {
+  const navigate = useNavigate();
+
   return (
     <div style={container}>
 
-      {/* 🔹 NAVBAR */}
-      <div style={navbar}>
-        <h2 style={logo}>EcoLoop 🌱</h2>
-
-        <div style={navLinks}>
-          <a style={link}>Home</a>
-          <a style={link}>Features</a>
-          <a style={link}>Leaderboard</a>
-          <a style={link}>Contact</a>
-        </div>
-      </div>
+     
 
       {/* 🔹 HERO SECTION */}
       <div style={hero}>
 
-        {/* LEFT CONTENT */}
-        <div style={left}>
+        <div style={heroContent}>
           <h1 style={title}>
             Smart <br />
             <span style={{ color: "#22c55e" }}>Sustainable Living</span>
@@ -32,19 +24,13 @@ export default function Landing() {
           </p>
 
           <div style={buttons}>
-            <button style={primaryBtn}>Get Started</button>
-            <button style={secondaryBtn}>Learn More</button>
-          </div>
-        </div>
+            <button style={primaryBtn} onClick={() => navigate("/dashboard")}>
+              Get Started
+            </button>
 
-        {/* RIGHT IMAGE DESIGN */}
-        <div style={right}>
-          <div style={imageWrapper}>
-            <img
-              src="/eco.jpg"   // 👉 put your 2nd image in public folder as eco.jpg
-              alt="eco"
-              style={image}
-            />
+            <button style={secondaryBtn} onClick={() => navigate("/helpdesk")}>
+              Learn More
+            </button>
           </div>
         </div>
 
@@ -76,13 +62,11 @@ export default function Landing() {
   );
 }
 
-/* 🎨 STYLES */
+/* 🎨 UPDATED LAYOUT STYLES */
 
 /* BACKGROUND */
 const container = {
   minHeight: "100vh",
-  padding: "30px 50px",
-  background: "linear-gradient(135deg, #d9f99d, #6ee7b7, #34d399)",
   fontFamily: "sans-serif",
   color: "#1f2937",
 };
@@ -92,7 +76,11 @@ const navbar = {
   display: "flex",
   justifyContent: "space-between",
   alignItems: "center",
-  marginBottom: "40px",
+  padding: "20px 50px",
+  position: "absolute",
+  width: "100%",
+  zIndex: 10,
+  color: "white",
 };
 
 const logo = {
@@ -105,89 +93,81 @@ const navLinks = {
 };
 
 const link = {
-  cursor: "pointer",
+  color: "white",
+  textDecoration: "none",
   fontWeight: "500",
 };
 
 /* HERO */
 const hero = {
+  height: "90vh",
   display: "flex",
   alignItems: "center",
-  justifyContent: "space-between",
-  marginBottom: "60px",
+  padding: "0 80px",
+
+  /* 🔥 BACKGROUND IMAGE */
+  backgroundImage: `
+    linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.55)),
+    url('/eco.jpg')
+  `,
+  backgroundSize: "cover",
+  backgroundPosition: "center",
 };
 
-/* LEFT */
-const left = {
-  maxWidth: "50%",
+/* CONTENT */
+const heroContent = {
+  maxWidth: "600px",
+  color: "white",
 };
 
+/* TEXT */
 const title = {
-  fontSize: "60px",
+  fontSize: "64px",
   fontWeight: "bold",
+  lineHeight: "1.2",
 };
 
 const desc = {
-  marginTop: "15px",
-  opacity: 0.7,
+  marginTop: "20px",
+  opacity: 0.85,
   lineHeight: "1.6",
 };
 
 /* BUTTONS */
 const buttons = {
-  marginTop: "20px",
+  marginTop: "30px",
   display: "flex",
   gap: "15px",
 };
 
 const primaryBtn = {
-  padding: "12px 20px",
+  padding: "12px 22px",
   borderRadius: "10px",
   border: "none",
   background: "linear-gradient(135deg, #22c55e, #10b981)",
   color: "white",
   cursor: "pointer",
+  fontWeight: "bold",
 };
 
 const secondaryBtn = {
-  padding: "12px 20px",
+  padding: "12px 22px",
   borderRadius: "10px",
-  border: "1px solid rgba(0,0,0,0.2)",
-  background: "white",
+  border: "1px solid white",
+  background: "transparent",
+  color: "white",
   cursor: "pointer",
-};
-
-/* RIGHT IMAGE */
-const right = {
-  display: "flex",
-  justifyContent: "center",
-  alignItems: "center",
-};
-
-const imageWrapper = {
-  width: "350px",
-  height: "350px",
-  borderRadius: "50%",
-  background: "white",
-  display: "flex",
-  justifyContent: "center",
-  alignItems: "center",
-  boxShadow: "0 10px 30px rgba(0,0,0,0.1)",
-};
-
-const image = {
-  width: "80%",
-  borderRadius: "50%",
 };
 
 /* FEATURES */
 const features = {
-  marginTop: "40px",
+  padding: "60px 50px",
+  background: "linear-gradient(135deg, #d9f99d, #6ee7b7, #34d399)",
 };
 
 const sectionTitle = {
   fontSize: "28px",
-  marginBottom: "20px",
+  marginBottom: "30px",
 };
 
 const featureGrid = {
@@ -201,5 +181,4 @@ const card = {
   borderRadius: "16px",
   background: "rgba(255,255,255,0.7)",
   backdropFilter: "blur(10px)",
-  boxShadow: "0 5px 15px rgba(0,0,0,0.05)",
 };
