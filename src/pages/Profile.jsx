@@ -14,9 +14,9 @@ export default function Profile() {
     const style = document.createElement("style");
     style.innerHTML = `
       @keyframes pulseGlow {
-        0% { box-shadow: 0 0 5px #10b981; }
-        50% { box-shadow: 0 0 20px #10b981; }
-        100% { box-shadow: 0 0 5px #10b981; }
+        0% { box-shadow: 0 0 5px #22c55e; }
+        50% { box-shadow: 0 0 20px #22c55e; }
+        100% { box-shadow: 0 0 5px #22c55e; }
       }
 
       @keyframes shimmer {
@@ -30,20 +30,14 @@ export default function Profile() {
   return (
     <div style={container}>
       
-      {/* TITLE */}
-      <h1 style={title}>
-        My Profile
-      </h1>
+      <h1 style={title}>My Profile</h1>
 
       <div style={grid}>
 
-        {/* 👤 PROFILE CARD */}
         <div style={card}>
-          
           <div style={{ textAlign: "center", position: "relative" }}>
             
             <div style={avatarGlow}></div>
-
             <div style={avatar}>👤</div>
 
             <h2>{user.name}</h2>
@@ -61,7 +55,6 @@ export default function Profile() {
           </div>
         </div>
 
-        {/* 📊 ECO IMPACT */}
         <div style={card}>
           <h3>Eco Impact</h3>
 
@@ -90,7 +83,6 @@ export default function Profile() {
           </div>
         </div>
 
-        {/* 🌱 SUSTAINABILITY */}
         <div style={cardWide}>
           <h3>🌱 Sustainability Insights</h3>
 
@@ -105,7 +97,6 @@ export default function Profile() {
           </div>
         </div>
 
-        {/* ⚙️ SETTINGS */}
         <div style={card}>
           <h3>Settings</h3>
 
@@ -119,14 +110,14 @@ export default function Profile() {
   );
 }
 
-/* 🎨 UPDATED COLOR SYSTEM */
+/* 🎨 DARK ECO GLASS THEME */
 
 /* BACKGROUND */
 const container = {
   minHeight: "100vh",
   padding: "40px",
-  background: "linear-gradient(135deg, #d9f99d, #6ee7b7, #34d399)",
-  color: "#1f2937",
+  background: "linear-gradient(135deg, #020617, #022c22, #064e3b)",
+  color: "#e2e8f0",
   fontFamily: "sans-serif",
 };
 
@@ -134,7 +125,7 @@ const container = {
 const title = {
   fontSize: "32px",
   marginBottom: "30px",
-  color: "#065f46",
+  color: "#e2e8f0",
 };
 
 /* GRID */
@@ -148,9 +139,9 @@ const grid = {
 const card = {
   padding: "20px",
   borderRadius: "16px",
-  background: "rgba(255,255,255,0.7)",
-  backdropFilter: "blur(10px)",
-  border: "1px solid rgba(0,0,0,0.05)",
+  background: "rgba(255,255,255,0.05)",
+  backdropFilter: "blur(12px)",
+  border: "1px solid rgba(255,255,255,0.08)",
 };
 
 const cardWide = {
@@ -168,7 +159,7 @@ const avatarGlow = {
   position: "absolute",
   width: "100px",
   height: "100px",
-  background: "radial-gradient(circle, rgba(16,185,129,0.3), transparent)",
+  background: "radial-gradient(circle, rgba(34,197,94,0.3), transparent)",
   filter: "blur(20px)",
   top: "-10px",
   left: "50%",
@@ -181,8 +172,9 @@ const editBtn = {
   padding: "10px 15px",
   borderRadius: "10px",
   border: "none",
-  background: "linear-gradient(135deg, #22c55e, #10b981)",
+  background: "linear-gradient(135deg, #22c55e, #16a34a)",
   color: "white",
+  boxShadow: "0 0 15px rgba(34,197,94,0.4)",
 };
 
 const btn = {
@@ -191,26 +183,26 @@ const btn = {
   marginTop: "10px",
   padding: "10px",
   borderRadius: "8px",
-  border: "1px solid rgba(0,0,0,0.1)",
+  border: "1px solid rgba(255,255,255,0.1)",
   background: "transparent",
-  color: "#1f2937",
+  color: "#e2e8f0",
 };
 
 const dangerBtn = {
   ...btn,
-  border: "1px solid red",
-  color: "red",
-  boxShadow: "0 0 12px rgba(255,50,50,0.3)",
+  border: "1px solid #ef4444",
+  color: "#ef4444",
+  boxShadow: "0 0 12px rgba(239,68,68,0.4)",
 };
 
 /* TEXT */
-const muted = { opacity: 0.6 };
+const muted = { opacity: 0.7, color: "#94a3b8" };
 
 const info = { marginTop: "15px", lineHeight: "1.8" };
 
 const divider = {
   height: "1px",
-  background: "rgba(0,0,0,0.08)",
+  background: "rgba(255,255,255,0.08)",
   margin: "15px 0",
 };
 
@@ -228,14 +220,14 @@ const green = {
 /* PROGRESS */
 const progressBg = {
   height: "8px",
-  background: "#d1fae5",
+  background: "#064e3b",
   borderRadius: "10px",
   marginTop: "15px",
 };
 
 const progressFill = {
   height: "100%",
-  background: "linear-gradient(90deg, #22c55e, #10b981)",
+  background: "linear-gradient(90deg, #22c55e, #4ade80)",
   borderRadius: "10px",
   animation: "pulseGlow 2s infinite",
 };
@@ -252,6 +244,6 @@ const badge = {
   padding: "6px 12px",
   borderRadius: "20px",
   border: "1px solid #22c55e",
-  color: "#065f46",
+  color: "#22c55e",
   background: "rgba(34,197,94,0.1)",
 };

@@ -1,12 +1,20 @@
 import React from "react";
 import { Link, useLocation } from "react-router-dom";
+import {
+  Home,
+  LayoutDashboard,
+  Upload,
+  Trophy,
+  User,
+  Phone
+} from "lucide-react";
 
 export default function Navbar() {
   const location = useLocation();
 
   return (
     <div style={navContainer}>
-      
+
       {/* 🔹 LOGO */}
       <h1 style={logo}>
         EcoLoop 🌱
@@ -15,33 +23,41 @@ export default function Navbar() {
       {/* 🔹 NAV ITEMS */}
       <div style={navItems}>
         
-        <NavItem to="/" label="Home" icon="🏠" active={location.pathname === "/"} />
-        <NavItem to="/dashboard" label="Dashboard" icon="📊" active={location.pathname === "/dashboard"} />
-        <NavItem to="/upload" label="Upload" icon="➕" active={location.pathname === "/upload"} />
-        <NavItem to="/leaderboard" label="Leaderboard" icon="🏆" active={location.pathname === "/leaderboard"} />
-        <NavItem to="/profile" label="Profile" icon="👤" active={location.pathname === "/profile"} />
-        <NavItem to="/helpdesk" label="Help" icon="📞" active={location.pathname === "/helpdesk"} />
+        <NavItem to="/" label="Home" Icon={Home} active={location.pathname === "/"} />
+        <NavItem to="/dashboard" label="Dashboard" Icon={LayoutDashboard} active={location.pathname === "/dashboard"} />
+        <NavItem to="/upload" label="Upload" Icon={Upload} active={location.pathname === "/upload"} />
+        <NavItem to="/leaderboard" label="Leaderboard" Icon={Trophy} active={location.pathname === "/leaderboard"} />
+        <NavItem to="/profile" label="Profile" Icon={User} active={location.pathname === "/profile"} />
+        <NavItem to="/helpdesk" label="Help" Icon={Phone} active={location.pathname === "/helpdesk"} />
 
       </div>
     </div>
   );
 }
 
-/* 🔹 NAV ITEM COMPONENT */
-function NavItem({ to, label, icon, active }) {
+/* 🔹 NAV ITEM */
+function NavItem({ to, label, Icon, active }) {
   return (
     <Link to={to} style={{ textDecoration: "none" }}>
       <div style={navItem(active)}>
-        <span style={iconStyle}>{icon}</span>
-        <span style={labelStyle}>{label}</span>
+
+        <Icon
+          size={20}
+          strokeWidth={2}
+          style={{
+            color: active ? "#22c55e" : "#94a3b8",
+            transition: "0.3s"
+          }}
+        />
+
+        <span style={labelStyle(active)}>{label}</span>
       </div>
     </Link>
   );
 }
 
-/* 🎨 STYLES */
+/* 🎨 STYLES (PREMIUM DARK GLASS) */
 
-/* CONTAINER */
 const navContainer = {
   position: "sticky",
   top: 0,
@@ -49,47 +65,43 @@ const navContainer = {
   display: "flex",
   justifyContent: "space-between",
   alignItems: "center",
-  padding: "15px 40px",
-  background: "rgba(255,255,255,0.8)",
-  backdropFilter: "blur(12px)",
-  borderBottom: "1px solid rgba(0,0,0,0.05)",
+  padding: "14px 40px",
+  background: "rgba(2,6,23,0.7)",
+  backdropFilter: "blur(16px)",
+  borderBottom: "1px solid rgba(255,255,255,0.08)",
 };
 
 /* LOGO */
 const logo = {
-  fontSize: "28px",
+  fontSize: "30px",
   fontWeight: "800",
-  fontFamily: "Poppins, sans-serif",
-  color: "#065f46",
+  color: "#22c55e",
   letterSpacing: "1px",
 };
 
 /* NAV ITEMS */
 const navItems = {
   display: "flex",
-  gap: "25px",
+  gap: "28px",
 };
 
-/* NAV ITEM */
+/* ITEM */
 const navItem = (active) => ({
   display: "flex",
   flexDirection: "column",
   alignItems: "center",
-  padding: "8px 12px",
-  borderRadius: "10px",
-  background: active ? "rgba(34,197,94,0.15)" : "transparent",
-  transition: "0.3s",
+  gap: "4px",
+  padding: "8px 10px",
+  borderRadius: "12px",
   cursor: "pointer",
+  background: active ? "rgba(34,197,94,0.1)" : "transparent",
+  boxShadow: active ? "0 0 15px rgba(34,197,94,0.3)" : "none",
+  transition: "0.3s",
 });
 
-/* ICON */
-const iconStyle = {
-  fontSize: "20px",
-};
-
 /* LABEL */
-const labelStyle = {
-  fontSize: "12px",
-  marginTop: "3px",
-  color: "#1f2937",
-};
+const labelStyle = (active) => ({
+  fontSize: "11px",
+  color: active ? "#22c55e" : "#94a3b8",
+  fontWeight: active ? "600" : "400",
+});

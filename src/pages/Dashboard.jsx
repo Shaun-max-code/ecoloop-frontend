@@ -18,11 +18,7 @@ export default function Dashboard() {
           Smart Waste System
         </p>
 
-        <div style={menu}>
-          <button style={activeBtn}>Dashboard</button>
-          <button style={btn}>Leaderboard</button>
-          <button style={btn}>Profile</button>
-        </div>
+        
       </div>
 
       {/* 🔹 MAIN GRID */}
@@ -35,7 +31,6 @@ export default function Dashboard() {
             <h1 style={bigNumber}>{points}</h1>
           </div>
 
-          {/* Animated circle */}
           <div style={circle}></div>
         </div>
 
@@ -74,14 +69,14 @@ export default function Dashboard() {
   );
 }
 
-/* 🎨 STYLES (UPDATED COLORS ONLY) */
+/* 🎨 DARK ECO GLASS THEME */
 
 /* MAIN CONTAINER */
 const container = {
   display: "flex",
   minHeight: "100vh",
-  background: "linear-gradient(135deg, #d9f99d, #6ee7b7, #34d399)",
-  color: "#1f2937",
+  background: "linear-gradient(135deg, #020617, #022c22, #064e3b)",
+  color: "#e2e8f0",
   fontFamily: "sans-serif",
 };
 
@@ -89,9 +84,9 @@ const container = {
 const sidebar = {
   width: "260px",
   padding: "30px",
-  background: "rgba(255,255,255,0.6)",
-  backdropFilter: "blur(10px)",
-  borderRight: "1px solid rgba(0,0,0,0.05)",
+  background: "rgba(255,255,255,0.03)",
+  backdropFilter: "blur(12px)",
+  borderRight: "1px solid rgba(255,255,255,0.08)",
 };
 
 const menu = {
@@ -104,18 +99,18 @@ const menu = {
 const btn = {
   padding: "12px",
   background: "transparent",
-  border: "1px solid rgba(0,0,0,0.1)",
-  color: "#1f2937",
+  border: "1px solid rgba(255,255,255,0.1)",
+  color: "#e2e8f0",
   borderRadius: "10px",
   cursor: "pointer",
 };
 
 const activeBtn = {
   ...btn,
-  background: "linear-gradient(135deg, #22c55e, #10b981)",
+  background: "linear-gradient(135deg, #22c55e, #16a34a)",
   color: "white",
   fontWeight: "bold",
-  boxShadow: "0 4px 15px rgba(16,185,129,0.4)",
+  boxShadow: "0 0 15px rgba(34,197,94,0.4)",
 };
 
 /* MAIN GRID */
@@ -132,13 +127,13 @@ const bigCard = {
   gridColumn: "span 3",
   padding: "30px",
   borderRadius: "20px",
-  background: "rgba(255,255,255,0.7)",
-  backdropFilter: "blur(10px)",
-  border: "1px solid rgba(0,0,0,0.05)",
+  background: "rgba(255,255,255,0.05)",
+  backdropFilter: "blur(12px)",
+  border: "1px solid rgba(255,255,255,0.08)",
   display: "flex",
   justifyContent: "space-between",
   alignItems: "center",
-  boxShadow: "0 10px 30px rgba(0,0,0,0.1)",
+  boxShadow: "0 0 20px rgba(34,197,94,0.2)",
 };
 
 const bigNumber = {
@@ -160,10 +155,10 @@ const circle = {
 const card = {
   padding: "20px",
   borderRadius: "16px",
-  background: "rgba(255,255,255,0.7)",
-  backdropFilter: "blur(10px)",
-  border: "1px solid rgba(0,0,0,0.05)",
-  boxShadow: "0 5px 15px rgba(0,0,0,0.05)",
+  background: "rgba(255,255,255,0.05)",
+  backdropFilter: "blur(12px)",
+  border: "1px solid rgba(255,255,255,0.08)",
+  boxShadow: "0 0 10px rgba(0,0,0,0.3)",
 };
 
 /* WIDE CARD */
@@ -171,14 +166,15 @@ const wideCard = {
   gridColumn: "span 2",
   padding: "20px",
   borderRadius: "16px",
-  background: "rgba(255,255,255,0.7)",
-  backdropFilter: "blur(10px)",
-  border: "1px solid rgba(0,0,0,0.05)",
+  background: "rgba(255,255,255,0.05)",
+  backdropFilter: "blur(12px)",
+  border: "1px solid rgba(255,255,255,0.08)",
 };
 
 /* TEXT */
 const label = {
-  opacity: 0.6,
+  opacity: 0.7,
+  color: "#94a3b8",
 };
 
 const value = {
@@ -189,16 +185,16 @@ const value = {
 /* PROGRESS BAR */
 const progressBg = {
   height: "8px",
-  background: "#d1fae5",
+  background: "#064e3b",
   borderRadius: "10px",
   marginTop: "10px",
 };
 
 const progressFill = {
   height: "100%",
-  background: "linear-gradient(90deg, #22c55e, #10b981)",
+  background: "linear-gradient(90deg, #22c55e, #4ade80)",
   borderRadius: "10px",
-  boxShadow: "0 0 10px #10b981",
+  boxShadow: "0 0 10px #22c55e",
 };
 
 /* 🔥 ANIMATION */

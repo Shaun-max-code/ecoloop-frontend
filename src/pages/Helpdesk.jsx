@@ -21,7 +21,7 @@ export default function Helpdesk() {
           <button style={primaryBtn}>Contact Support</button>
         </div>
 
-        {/* RIGHT (Illustration Placeholder) */}
+        {/* RIGHT */}
         <div style={heroRight}>
           <div style={illustration}>📞🌿</div>
         </div>
@@ -31,7 +31,6 @@ export default function Helpdesk() {
       {/* 🔹 GRID SECTION */}
       <div style={grid}>
 
-        {/* 📘 HOW TO USE */}
         <div style={card}>
           <h3>📘 How to Use EcoLoop</h3>
           <ul style={list}>
@@ -42,7 +41,6 @@ export default function Helpdesk() {
           </ul>
         </div>
 
-        {/* ❓ FAQ */}
         <div style={card}>
           <h3>❓ FAQs</h3>
           <ul style={list}>
@@ -53,7 +51,6 @@ export default function Helpdesk() {
           </ul>
         </div>
 
-        {/* ☎️ HELPLINE */}
         <div style={card}>
           <h3>☎️ Helpline</h3>
           <p>Email: support@ecoloop.com</p>
@@ -61,7 +58,6 @@ export default function Helpdesk() {
           <p>Available: 9 AM - 6 PM</p>
         </div>
 
-        {/* ⚡ QUICK ACTIONS */}
         <div style={card}>
           <h3>⚡ Quick Actions</h3>
           <button style={btn}>Report Issue</button>
@@ -74,15 +70,15 @@ export default function Helpdesk() {
   );
 }
 
-/* 🎨 COLOR SYSTEM APPLIED */
+/* 🎨 DARK ECO GLASS THEME */
 
 /* BACKGROUND */
 const container = {
   minHeight: "100vh",
   padding: "40px",
-  background: "linear-gradient(135deg, #d9f99d, #6ee7b7, #34d399)",
+  background: "linear-gradient(135deg, #020617, #022c22, #064e3b)",
   fontFamily: "sans-serif",
-  color: "#1f2937",
+  color: "#e2e8f0",
 };
 
 /* HERO */
@@ -91,10 +87,11 @@ const hero = {
   justifyContent: "space-between",
   alignItems: "center",
   marginBottom: "40px",
-  background: "rgba(255,255,255,0.7)",
-  backdropFilter: "blur(10px)",
+  background: "rgba(255,255,255,0.05)",
+  backdropFilter: "blur(12px)",
   padding: "30px",
   borderRadius: "20px",
+  border: "1px solid rgba(255,255,255,0.08)",
 };
 
 const heroLeft = {
@@ -120,6 +117,7 @@ const title = {
 const desc = {
   opacity: 0.7,
   marginBottom: "20px",
+  color: "#94a3b8",
 };
 
 /* BUTTON */
@@ -127,9 +125,10 @@ const primaryBtn = {
   padding: "12px 20px",
   borderRadius: "10px",
   border: "none",
-  background: "linear-gradient(135deg, #22c55e, #10b981)",
+  background: "linear-gradient(135deg, #22c55e, #16a34a)",
   color: "white",
   cursor: "pointer",
+  boxShadow: "0 0 15px rgba(34,197,94,0.4)",
 };
 
 /* GRID */
@@ -143,10 +142,10 @@ const grid = {
 const card = {
   padding: "20px",
   borderRadius: "16px",
-  background: "rgba(255,255,255,0.7)",
-  backdropFilter: "blur(10px)",
-  border: "1px solid rgba(0,0,0,0.05)",
-  boxShadow: "0 5px 15px rgba(0,0,0,0.05)",
+  background: "rgba(255,255,255,0.05)",
+  backdropFilter: "blur(12px)",
+  border: "1px solid rgba(255,255,255,0.08)",
+  boxShadow: "0 0 10px rgba(0,0,0,0.3)",
 };
 
 /* LIST */
@@ -154,6 +153,7 @@ const list = {
   marginTop: "10px",
   paddingLeft: "20px",
   lineHeight: "1.8",
+  color: "#94a3b8",
 };
 
 /* BUTTONS */
@@ -163,7 +163,8 @@ const btn = {
   marginTop: "10px",
   padding: "10px",
   borderRadius: "8px",
-  border: "1px solid rgba(0,0,0,0.1)",
+  border: "1px solid rgba(255,255,255,0.1)",
   background: "transparent",
+  color: "#e2e8f0",
   cursor: "pointer",
 };

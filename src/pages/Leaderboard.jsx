@@ -19,10 +19,9 @@ export default function Leaderboard({ userPoints }) {
         Leader<span style={{ color: "#22c55e" }}>Board</span>
       </h1>
 
-      {/* 🏆 TOP 3 (CENTERED #1) */}
+      {/* 🏆 TOP 3 */}
       <div style={top3Wrapper}>
         
-        {/* 2nd */}
         {top3[1] && (
           <div style={cardStyle(1, top3[1].self)}>
             <div style={rankBadgeStyle(2)}>2</div>
@@ -32,7 +31,6 @@ export default function Leaderboard({ userPoints }) {
           </div>
         )}
 
-        {/* 1st */}
         {top3[0] && (
           <div style={cardStyle(0, top3[0].self)}>
             <div style={rankBadgeStyle(1)}>1</div>
@@ -42,7 +40,6 @@ export default function Leaderboard({ userPoints }) {
           </div>
         )}
 
-        {/* 3rd */}
         {top3[2] && (
           <div style={cardStyle(2, top3[2].self)}>
             <div style={rankBadgeStyle(3)}>3</div>
@@ -86,7 +83,7 @@ function XPBar({ pts, max, small }) {
         <div style={{ ...xpFill, width: `${width}%` }} />
       </div>
       {!small && (
-        <p style={{ fontSize: "12px", marginTop: "4px", color: "#1f2937" }}>
+        <p style={{ fontSize: "12px", marginTop: "4px", color: "#94a3b8" }}>
           {pts} pts
         </p>
       )}
@@ -94,14 +91,14 @@ function XPBar({ pts, max, small }) {
   );
 }
 
-/* 🎨 UPDATED COLORS */
+/* 🎨 DARK ECO GLASS THEME */
 
 /* BACKGROUND */
 const containerStyle = {
   minHeight: "100vh",
   padding: "40px 20px",
-  background: "linear-gradient(135deg, #d9f99d, #6ee7b7, #34d399)",
-  color: "#1f2937",
+  background: "linear-gradient(135deg, #020617, #022c22, #064e3b)",
+  color: "#e2e8f0",
   fontFamily: "sans-serif",
 };
 
@@ -109,7 +106,7 @@ const titleStyle = {
   textAlign: "center",
   fontSize: "2.6rem",
   marginBottom: "50px",
-  color: "#065f46",
+  color: "#e2e8f0",
 };
 
 const top3Wrapper = {
@@ -134,12 +131,12 @@ const cardStyle = (position, isSelf) => {
     borderRadius: "18px",
     width: "140px",
     position: "relative",
-    background: "rgba(255,255,255,0.7)",
-    backdropFilter: "blur(10px)",
-    border: isSelf ? "2px solid #22c55e" : "1px solid rgba(0,0,0,0.05)",
+    background: "rgba(255,255,255,0.05)",
+    backdropFilter: "blur(12px)",
+    border: isSelf ? "1px solid #22c55e" : "1px solid rgba(255,255,255,0.08)",
     boxShadow: isSelf
-      ? "0 0 20px #10b98155"
-      : "0 5px 15px rgba(0,0,0,0.05)",
+      ? "0 0 20px rgba(34,197,94,0.4)"
+      : "0 0 10px rgba(0,0,0,0.3)",
   };
 };
 
@@ -153,8 +150,8 @@ const rankBadgeStyle = (rank) => ({
     rank === 1
       ? "#22c55e"
       : rank === 2
-      ? "#94a3b8"
-      : "#10b981",
+      ? "#64748b"
+      : "#16a34a",
   color: "white",
   fontWeight: "bold",
   borderRadius: "50%",
@@ -169,12 +166,12 @@ const rankBadgeStyle = (rank) => ({
 const avatarStyle = (isSelf) => ({
   fontSize: "45px",
   marginTop: "10px",
-  color: isSelf ? "#22c55e" : "#6b7280",
+  color: isSelf ? "#22c55e" : "#94a3b8",
 });
 
 const smallAvatar = (isSelf) => ({
   fontSize: "20px",
-  color: isSelf ? "#22c55e" : "#6b7280",
+  color: isSelf ? "#22c55e" : "#94a3b8",
 });
 
 /* 📊 LIST */
@@ -185,24 +182,24 @@ const listItemStyle = (isSelf) => ({
   padding: "16px",
   marginBottom: "12px",
   borderRadius: "14px",
-  background: "rgba(255,255,255,0.7)",
-  backdropFilter: "blur(10px)",
-  border: isSelf ? "1px solid #22c55e" : "1px solid rgba(0,0,0,0.05)",
-  boxShadow: "0 5px 15px rgba(0,0,0,0.05)",
+  background: "rgba(255,255,255,0.05)",
+  backdropFilter: "blur(12px)",
+  border: isSelf ? "1px solid #22c55e" : "1px solid rgba(255,255,255,0.08)",
+  boxShadow: "0 0 10px rgba(0,0,0,0.3)",
 });
 
 /* XP */
 const xpBg = {
   height: "6px",
-  background: "#d1fae5",
+  background: "#064e3b",
   borderRadius: "10px",
   overflow: "hidden",
 };
 
 const xpFill = {
   height: "100%",
-  background: "linear-gradient(90deg, #22c55e, #10b981)",
-  boxShadow: "0 0 8px #10b981",
+  background: "linear-gradient(90deg, #22c55e, #4ade80)",
+  boxShadow: "0 0 10px #22c55e",
   transition: "width 0.6s ease",
 };
 
