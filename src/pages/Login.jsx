@@ -1,36 +1,38 @@
-import React, { useState } from "react";
-
+import { useState } from "react";
 
 export default function Login() {
-  const [username, setUsername] = useState("");
+
+  const [username, setUsername] = useState(""); // ✅ ADD THIS
   const [password, setPassword] = useState("");
 
- const handleLogin = async () => {
-  try {
-    const res = await fetch(`${import.meta.env.VITE_API_URL}/api/login/`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ username, password }),
-    });
+  const handleLogin = async () => {
+    try {
 
-    const data = await res.json();
+      const res = await fetch("https://ecoloop-backend-ukxb.onrender.com/api/login", {
+        method: "POST", // ✅ comma fixed
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ username, password }),
+      });
 
-    console.log("LOGIN RESPONSE:", data); // 👈 ADD THIS
+      const data = await res.json();
 
-    if (data.access) {
-      localStorage.setItem("token", data.access);
-      console.log("TOKEN SAVED"); // 👈 DEBUG
+      console.log("LOGIN RESPONSE:", data);
 
-      window.location.href = "/";
-    } else {
-      alert("Invalid credentials");
+      if (data.access) {
+        localStorage.setItem("token", data.access);
+        console.log("TOKEN SAVED");
+
+        window.location.href = "/";
+      } else {
+        alert("Invalid credentials");
+      }
+
+    } catch (err) {
+      console.error("LOGIN ERROR:", err);
     }
-  } catch (err) {
-    console.error(err);
-  }
-};
+  };
   return (
     <div className="min-h-screen bg-gradient-to-br from-black via-green-900 to-black text-white">
       

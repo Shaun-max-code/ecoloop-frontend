@@ -5,40 +5,21 @@ export default function Leaderboard({ userPoints }) {
 
 useEffect(() => {
   async function fetchLeaderboard() {
-    try {
-      const token = localStorage.getItem("token");
 
-      // ✅ DEBUG (add this line here)
-      console.log("TOKEN:", token);
+    const token = localStorage.getItem("token"); // ✅ FIX
 
-      const res = await fetch(`${import.meta.env.VITE_API_URL}/api/leaderboard/`, {
-        method: "GET",
-        headers: {
-          "Authorization": `Bearer ${token}`,   // ✅ VERY IMPORTANT
-          "Content-Type": "application/json",
-        },
-      });
+    console.log("TOKEN:", token);
 
-      const data = await res.json();
-      console.log("DATA:", data); // ✅ debug
+    const res = await fetch("https://ecoloop-backend-ukxb.onrender.com/api/leaderboard", {
+      method: "GET",
+      headers: {
+        "Authorization": `Bearer ${token}`, // ✅ now valid
+        "Content-Type": "application/json",
+      },
+    });
 
-      // ✅ SAFETY CHECK
-      if (!Array.isArray(data)) {
-        console.error("API ERROR:", data);
-        return;
-      }
-
-      const formatted = data.map((p) => ({
-        name: p.name,
-        pts: p.points,
-        self: p.isCurrentUser,
-      }));
-
-      setPlayers(formatted);
-
-    } catch (err) {
-      console.error("Error fetching leaderboard:", err);
-    }
+    const data = await res.json();
+    console.log(data);
   }
 
   fetchLeaderboard();
