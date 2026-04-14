@@ -1,17 +1,54 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 
 export default function Leaderboard({ userPoints }) {
-  const players = [
-    { name: "SHAUN_MATHEW", pts: userPoints, self: true },
-    { name: "ALEX_V_09", pts: 4200 },
-    { name: "PRIYA_TRACER", pts: 3850 },
-    { name: "DAVID_X", pts: 3000 },
-    { name: "NEHA_DEV", pts: 2700 },
-  ].sort((a, b) => b.pts - a.pts);
+  const [players, setPlayers] = useState([]);
 
-  const maxPoints = players[0].pts;
-  const top3 = players.slice(0, 3);
-  const rest = players.slice(3);
+useEffect(() => {
+  async function fetchLeaderboard() {
+    try {
+      const token = localStorage.getItem("token");
+
+      // ✅ DEBUG (add this line here)
+      console.log("TOKEN:", token);
+
+      const res = await fetch("http://127.0.0.1:8000/api/leaderboard/", {
+        method: "GET",
+        headers: {
+          "Authorization": `Bearer ${token}`,   // ✅ VERY IMPORTANT
+          "Content-Type": "application/json",
+        },
+      });
+
+      const data = await res.json();
+      console.log("DATA:", data); // ✅ debug
+
+      // ✅ SAFETY CHECK
+      if (!Array.isArray(data)) {
+        console.error("API ERROR:", data);
+        return;
+      }
+
+      const formatted = data.map((p) => ({
+        name: p.name,
+        pts: p.points,
+        self: p.isCurrentUser,
+      }));
+
+      setPlayers(formatted);
+
+    } catch (err) {
+      console.error("Error fetching leaderboard:", err);
+    }
+  }
+
+  fetchLeaderboard();
+}, []);
+  // 🔥 SORT AFTER FETCH
+  const sortedPlayers = [...players].sort((a, b) => b.pts - a.pts);
+
+  const maxPoints = sortedPlayers[0]?.pts || 1;
+  const top3 = sortedPlayers.slice(0, 3);
+  const rest = sortedPlayers.slice(3);
 
   return (
     <div style={containerStyle}>
@@ -91,9 +128,7 @@ function XPBar({ pts, max, small }) {
   );
 }
 
-/* 🎨 DARK ECO GLASS THEME */
-
-/* BACKGROUND */
+/* 🎨 STYLES (UNCHANGED) */
 const containerStyle = {
   minHeight: "100vh",
   padding: "40px 20px",
@@ -117,7 +152,6 @@ const top3Wrapper = {
   marginBottom: "60px",
 };
 
-/* 🏆 CARD */
 const cardStyle = (position, isSelf) => {
   const scale =
     position === 0 ? 1.25 :
@@ -140,7 +174,6 @@ const cardStyle = (position, isSelf) => {
   };
 };
 
-/* 🔢 BADGE */
 const rankBadgeStyle = (rank) => ({
   position: "absolute",
   top: "-12px",
@@ -162,7 +195,6 @@ const rankBadgeStyle = (rank) => ({
   justifyContent: "center",
 });
 
-/* 👤 AVATAR */
 const avatarStyle = (isSelf) => ({
   fontSize: "45px",
   marginTop: "10px",
@@ -174,7 +206,6 @@ const smallAvatar = (isSelf) => ({
   color: isSelf ? "#22c55e" : "#94a3b8",
 });
 
-/* 📊 LIST */
 const listItemStyle = (isSelf) => ({
   display: "flex",
   justifyContent: "space-between",
@@ -188,7 +219,6 @@ const listItemStyle = (isSelf) => ({
   boxShadow: "0 0 10px rgba(0,0,0,0.3)",
 });
 
-/* XP */
 const xpBg = {
   height: "6px",
   background: "#064e3b",
