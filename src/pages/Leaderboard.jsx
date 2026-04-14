@@ -11,7 +11,7 @@ useEffect(() => {
       // ✅ DEBUG (add this line here)
       console.log("TOKEN:", token);
 
-      const res = await fetch("http://127.0.0.1:8000/api/leaderboard/", {
+      const res = await fetch("https://ecoloop-backend-ukxb.onrender.com/api/leaderboard/", {
         method: "GET",
         headers: {
           "Authorization": `Bearer ${token}`,   // ✅ VERY IMPORTANT
