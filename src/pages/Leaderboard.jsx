@@ -11,7 +11,7 @@ useEffect(() => {
       // ✅ DEBUG (add this line here)
       console.log("TOKEN:", token);
 
-      const res = await fetch("https://ecoloop-backend-ukxb.onrender.com/api/leaderboard/", {
+      const res = await fetch(`${import.meta.env.VITE_API_URL}/api/leaderboard/`, {
         method: "GET",
         headers: {
           "Authorization": `Bearer ${token}`,   // ✅ VERY IMPORTANT

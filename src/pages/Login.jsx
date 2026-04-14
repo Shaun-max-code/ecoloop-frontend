@@ -7,7 +7,7 @@ export default function Login() {
 
  const handleLogin = async () => {
   try {
-    const res = await fetch("https://ecoloop-backend-ukxb.onrender.com/api/login/", {
+    const res = await fetch(`${import.meta.env.VITE_API_URL}/api/login/`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
