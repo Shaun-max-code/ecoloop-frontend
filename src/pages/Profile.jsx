@@ -1,16 +1,31 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 
 export default function Profile() {
-  const user = {
-    name: "Shaun Mathew",
-    email: "shaun@email.com",
-    phone: "+91 98765 43210",
-    points: 1240,
-    co2: 32.5,
-    waste: 15,
-  };
+  const [user, setUser] = useState(null);
 
   useEffect(() => {
+    const fetchProfile = async () => {
+      try {
+        const token = localStorage.getItem("token");
+
+        const res = await fetch(
+          "https://ecoloop-backend-ukxb.onrender.com/api/profile/",
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+
+        const data = await res.json();
+        setUser(data);
+      } catch (error) {
+        console.error("Error fetching profile:", error);
+      }
+    };
+
+    fetchProfile();
+
     const style = document.createElement("style");
     style.innerHTML = `
       @keyframes pulseGlow {
@@ -27,6 +42,10 @@ export default function Profile() {
     document.head.appendChild(style);
   }, []);
 
+  if (!user) {
+    return <div style={container}>Loading...</div>;
+  }
+
   return (
     <div style={container}>
       
@@ -40,7 +59,8 @@ export default function Profile() {
             <div style={avatarGlow}></div>
             <div style={avatar}>👤</div>
 
-            <h2>{user.name}</h2>
+            {/* ✅ DYNAMIC */}
+            <h2>{user.username}</h2>
             <p style={muted}>{user.email}</p>
 
             <button style={editBtn}>Edit Profile</button>
@@ -49,8 +69,8 @@ export default function Profile() {
           <div style={divider}></div>
 
           <div style={info}>
-            <p><b>Phone:</b> {user.phone}</p>
-            <p><b>Member Since:</b> Jan 2026</p>
+            <p><b>Phone:</b> {user.phone || "N/A"}</p>
+            <p><b>Member Since:</b> {user.date_joined ? user.date_joined.slice(0,10) : "N/A"}</p>
             <p><b>Status:</b> <span style={green}>Active 🌱</span></p>
           </div>
         </div>
@@ -60,24 +80,24 @@ export default function Profile() {
 
           <div style={statRow}>
             <span>Total Points</span>
-            <span style={green}>{user.points}</span>
+            <span style={green}>{user.points || 0}</span>
           </div>
 
           <div style={statRow}>
             <span>CO₂ Saved</span>
-            <span style={green}>{user.co2} KG</span>
+            <span style={green}>{user.co2 || 0} KG</span>
           </div>
 
           <div style={statRow}>
             <span>Waste Logged</span>
-            <span style={green}>{user.waste}</span>
+            <span style={green}>{user.waste || 0}</span>
           </div>
 
           <div style={progressBg}>
             <div
               style={{
                 ...progressFill,
-                width: `${user.points / 20}%`,
+                width: `${(user.points || 0) / 20}%`,
               }}
             />
           </div>
@@ -87,7 +107,7 @@ export default function Profile() {
           <h3>🌱 Sustainability Insights</h3>
 
           <p style={muted}>
-            You’ve reduced approx <b>{user.co2} kg</b> of CO₂ emissions.
+            You’ve reduced approx <b>{user.co2 || 0} kg</b> of CO₂ emissions.
           </p>
 
           <div style={badges}>
@@ -112,7 +132,6 @@ export default function Profile() {
 
 /* 🎨 DARK ECO GLASS THEME */
 
-/* BACKGROUND */
 const container = {
   minHeight: "100vh",
   padding: "40px",
@@ -121,21 +140,18 @@ const container = {
   fontFamily: "sans-serif",
 };
 
-/* TITLE */
 const title = {
   fontSize: "32px",
   marginBottom: "30px",
   color: "#e2e8f0",
 };
 
-/* GRID */
 const grid = {
   display: "grid",
   gridTemplateColumns: "2fr 1fr",
   gap: "20px",
 };
 
-/* CARD */
 const card = {
   padding: "20px",
   borderRadius: "16px",
@@ -149,7 +165,6 @@ const cardWide = {
   gridColumn: "span 2",
 };
 
-/* AVATAR */
 const avatar = {
   fontSize: "60px",
   color: "#22c55e",
@@ -166,7 +181,6 @@ const avatarGlow = {
   transform: "translateX(-50%)",
 };
 
-/* BUTTONS */
 const editBtn = {
   marginTop: "10px",
   padding: "10px 15px",
@@ -195,7 +209,6 @@ const dangerBtn = {
   boxShadow: "0 0 12px rgba(239,68,68,0.4)",
 };
 
-/* TEXT */
 const muted = { opacity: 0.7, color: "#94a3b8" };
 
 const info = { marginTop: "15px", lineHeight: "1.8" };
@@ -217,7 +230,6 @@ const green = {
   fontWeight: "bold",
 };
 
-/* PROGRESS */
 const progressBg = {
   height: "8px",
   background: "#064e3b",
@@ -232,7 +244,6 @@ const progressFill = {
   animation: "pulseGlow 2s infinite",
 };
 
-/* BADGES */
 const badges = {
   marginTop: "15px",
   display: "flex",
