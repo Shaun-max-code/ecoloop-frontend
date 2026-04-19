@@ -15,9 +15,11 @@ useEffect(() => {
       const res = await fetch(
         "https://ecoloop-backend-ukxb.onrender.com/api/auth/profile/",
         {
+          method: "GET",
+
           headers: {
              "Content-Type": "application/json",
-  "Authorization": `Bearer ${localStorage.getItem("token")}`
+  "Authorization": `Bearer ${token}`,
           },
         }
       );
