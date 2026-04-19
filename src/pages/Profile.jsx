@@ -13,7 +13,7 @@ useEffect(() => {
       }
 
       const res = await fetch(
-        "https://ecoloop-backend-ukxb.onrender.com/api/profile/",
+        "https://ecoloop-backend-ukxb.onrender.com/api/auth/profile/",
         {
           headers: {
             Authorization: `Bearer ${token}`,
