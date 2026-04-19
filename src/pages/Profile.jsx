@@ -2,8 +2,7 @@ import React, { useEffect, useState } from "react";
 
 export default function Profile() {
   const [user, setUser] = useState(null);
-
- useEffect(() => {
+useEffect(() => {
   const fetchProfile = async () => {
     try {
       const token = localStorage.getItem("token");
@@ -35,23 +34,24 @@ export default function Profile() {
   };
 
   fetchProfile();
+
+  // ✅ KEEP STYLE INSIDE useEffect
+  const style = document.createElement("style");
+  style.innerHTML = `
+    @keyframes pulseGlow {
+      0% { box-shadow: 0 0 5px #22c55e; }
+      50% { box-shadow: 0 0 20px #22c55e; }
+      100% { box-shadow: 0 0 5px #22c55e; }
+    }
+
+    @keyframes shimmer {
+      0% { background-position: -200px 0; }
+      100% { background-position: 200px 0; }
+    }
+  `;
+  document.head.appendChild(style);
+
 }, []);
-
-    const style = document.createElement("style");
-    style.innerHTML = `
-      @keyframes pulseGlow {
-        0% { box-shadow: 0 0 5px #22c55e; }
-        50% { box-shadow: 0 0 20px #22c55e; }
-        100% { box-shadow: 0 0 5px #22c55e; }
-      }
-
-      @keyframes shimmer {
-        0% { background-position: -200px 0; }
-        100% { background-position: 200px 0; }
-      }
-    `;
-    document.head.appendChild(style);
-  }, []);
 
   if (!user) {
     return <div style={container}>Loading...</div>;
