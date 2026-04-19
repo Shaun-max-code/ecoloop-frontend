@@ -16,7 +16,8 @@ useEffect(() => {
         "https://ecoloop-backend-ukxb.onrender.com/api/auth/profile/",
         {
           headers: {
-            Authorization: `Bearer ${token}`,
+             "Content-Type": "application/json",
+  "Authorization": `Bearer ${localStorage.getItem("token")}`
           },
         }
       );
