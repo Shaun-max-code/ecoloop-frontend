@@ -3,28 +3,39 @@ import React, { useEffect, useState } from "react";
 export default function Profile() {
   const [user, setUser] = useState(null);
 
-  useEffect(() => {
-    const fetchProfile = async () => {
-      try {
-        const token = localStorage.getItem("token");
+ useEffect(() => {
+  const fetchProfile = async () => {
+    try {
+      const token = localStorage.getItem("token");
 
-        const res = await fetch(
-          "https://ecoloop-backend-ukxb.onrender.com/api/profile/",
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        );
-
-        const data = await res.json();
-        setUser(data);
-      } catch (error) {
-        console.error("Error fetching profile:", error);
+      if (!token) {
+        console.error("No token found");
+        return;
       }
-    };
 
-    fetchProfile();
+      const res = await fetch(
+        "https://ecoloop-backend-ukxb.onrender.com/api/profile/",
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      if (!res.ok) {
+        console.error("API failed:", res.status);
+        return;
+      }
+
+      const data = await res.json();
+      setUser(data);
+    } catch (error) {
+      console.error("Error fetching profile:", error);
+    }
+  };
+
+  fetchProfile();
+}, []);
 
     const style = document.createElement("style");
     style.innerHTML = `
